@@ -11,7 +11,7 @@ namespace SiliconStudio.Xenko.SpriteStudio.Runtime
         public SpriteStudioNodeLinkProcessor()
             : base(typeof(TransformComponent))
         {
-            Order = 551;
+            Order = (int)ProcessorOrder.SpriteStudioNodeLink;
         }
 
         protected override SpriteStudioNodeLinkComponent GenerateComponentData(Entity entity, SpriteStudioNodeLinkComponent component)

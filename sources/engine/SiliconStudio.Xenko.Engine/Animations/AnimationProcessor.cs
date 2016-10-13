@@ -19,7 +19,7 @@ namespace SiliconStudio.Xenko.Animations
 
         public AnimationProcessor()
         {
-            Order = -500;
+            Order = (int)ProcessorOrder.Animation;
         }
 
         protected override AssociatedData GenerateComponentData(Entity entity, AnimationComponent component)

@@ -12,6 +12,23 @@ using SiliconStudio.Xenko.Rendering;
 
 namespace SiliconStudio.Xenko.Engine
 {
+    /// <summary>
+    /// Helper enum to visualize processor execution order
+    /// </summary>
+    public enum ProcessorOrder : int
+    {
+        Default                 = 0,
+
+        Script                  = -100000,
+        Animation               = -500,
+        ModelNodeLink           = -250,
+        Transform               = -200,
+        Camera                  = -10,
+        SpriteStudioRenderer    = 550,
+        SpriteStudioNodeLink    = 551,
+        Physics                 = 0xFFFF,
+    }
+
     /// <summary>Entity processor, triggered on various <see cref="EntityManager"/> events such as Entity and Component additions and removals.</summary>
     public abstract class EntityProcessor
     {

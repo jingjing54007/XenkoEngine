@@ -18,7 +18,7 @@ namespace SiliconStudio.Xenko.Engine.Processors
         public CameraProcessor()
         {
             Cameras = new List<CameraComponent>();
-            Order = -10;
+            Order = (int)ProcessorOrder.Camera;
         }
 
         protected override CameraComponent GenerateComponentData(Entity entity, CameraComponent component)

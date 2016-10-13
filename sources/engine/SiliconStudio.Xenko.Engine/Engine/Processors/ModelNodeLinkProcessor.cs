@@ -12,6 +12,7 @@ namespace SiliconStudio.Xenko.Engine.Processors
         public ModelNodeLinkProcessor()
             : base(typeof(TransformComponent))
         {
+            Order = (int)ProcessorOrder.ModelNodeLink;
         }
 
         protected override ModelNodeLinkComponent GenerateComponentData(Entity entity, ModelNodeLinkComponent component)

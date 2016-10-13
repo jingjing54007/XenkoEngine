@@ -14,7 +14,7 @@ namespace SiliconStudio.Xenko.Engine.Processors
         public ScriptProcessor()
         {
             // Script processor always running before others
-            Order = -100000;
+            Order = (int)ProcessorOrder.Script;
         }
 
         /// <inheritdoc/>
