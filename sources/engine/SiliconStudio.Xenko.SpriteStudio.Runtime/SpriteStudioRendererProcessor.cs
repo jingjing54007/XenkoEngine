@@ -12,7 +12,7 @@ namespace SiliconStudio.Xenko.SpriteStudio.Runtime
         public SpriteStudioRendererProcessor()
             : base(typeof(TransformComponent))
         {
-            Order = 550;
+            Order = (int)ProcessorOrder.SpriteStudioRenderer;
         }
 
         protected override RenderSpriteStudio GenerateComponentData(Entity entity, SpriteStudioComponent component)
