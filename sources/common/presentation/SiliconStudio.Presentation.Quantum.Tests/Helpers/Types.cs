@@ -1,23 +1,22 @@
-﻿using SiliconStudio.Presentation.Quantum;
-using SiliconStudio.Quantum;
+﻿using SiliconStudio.Quantum;
 using SiliconStudio.Quantum.Contents;
 using SiliconStudio.Quantum.References;
 
-namespace SiliconStudio.Presentation.Tests.Helpers
+namespace SiliconStudio.Presentation.Quantum.Tests.Helpers
 {
     public static class Types
     {
         public class TestPropertiesProvider : IPropertiesProviderViewModel
         {
-            private readonly IGraphNode rootNode;
+            private readonly IContentNode rootNode;
 
-            public TestPropertiesProvider(IGraphNode rootNode)
+            public TestPropertiesProvider(IContentNode rootNode)
             {
                 this.rootNode = rootNode;
             }
             public bool CanProvidePropertiesViewModel => true;
 
-            public IGraphNode GetRootNode()
+            public IContentNode GetRootNode()
             {
                 return rootNode;
             }
