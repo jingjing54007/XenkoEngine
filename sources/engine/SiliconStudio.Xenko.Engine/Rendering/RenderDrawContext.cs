@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using SiliconStudio.Core;
+using SiliconStudio.Core.Mathematics;
 using SiliconStudio.Xenko.Graphics;
 
 namespace SiliconStudio.Xenko.Rendering
@@ -123,38 +124,39 @@ namespace SiliconStudio.Xenko.Rendering
         private class StateAndTargets
         {
             private const int MaxRenderTargetCount = 8;
+            private const int MaxViewportAndScissorRectangleCount = 16;
 
             public int RenderTargetCount;
+            public int ViewportCount;
 
-            public Viewport[] Viewports;
-            public Texture[] RenderTargets;
+            public readonly Viewport[] Viewports = new Viewport[MaxViewportAndScissorRectangleCount];
+            public readonly Texture[] RenderTargets = new Texture[MaxRenderTargetCount];
             public Texture DepthStencilBuffer;
 
             public void Capture(CommandList commandList)
             {
                 RenderTargetCount = commandList.RenderTargetCount;
-
-                // TODO GRAPHICS REFACTOR avoid unecessary reallocation if size is different
-                if (RenderTargetCount > 0 && (RenderTargets == null || RenderTargets.Length != RenderTargetCount))
-                {
-                    RenderTargets = new Texture[RenderTargetCount];
-                    Viewports = new Viewport[RenderTargetCount];
-                }
+                ViewportCount = commandList.ViewportCount;
 
                 DepthStencilBuffer = commandList.DepthStencilBuffer;
-
+                
+                // TODO: Backup scissor rectangles and restore them
+                
                 for (int i = 0; i < RenderTargetCount; i++)
                 {
-                    Viewports[i] = commandList.Viewports[i];
                     RenderTargets[i] = commandList.RenderTargets[i];
+                }
+
+                for (int i = 0; i < ViewportCount; i++)
+                {
+                    Viewports[i] = commandList.Viewports[i];
                 }
             }
 
             public void Restore(CommandList commandList)
             {
-                commandList.SetRenderTargetsAndViewport(DepthStencilBuffer, RenderTargetCount > 0 ? RenderTargets : null);
-                if (RenderTargetCount > 0)
-                    commandList.SetViewports(Viewports);
+                commandList.SetRenderTargets(DepthStencilBuffer, RenderTargetCount, RenderTargets);
+                commandList.SetViewports(ViewportCount, Viewports);
             }
         }
     }
